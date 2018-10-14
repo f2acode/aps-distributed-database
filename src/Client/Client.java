@@ -2,6 +2,8 @@ package Client;
 
 import Models.Request;
 import Models.Response;
+import Models.Status;
+import Models.Type;
 import Server.Connection;
 
 import java.io.*;
@@ -23,10 +25,10 @@ public class Client {
     public static void main(String args[]){
         Request requisicao = new Request();
         new Client();
-        Connection.send(socket, requisicao);
+        Connection.send(socket, requisicao, Type.GET);
         Response response = (Response) Connection.receive(socket);
         
-        if (response.getStatus() == 0) {
+        if (response.getStatus().equals(Status.INVALID)) {
             System.out.println("Resposta Inválida");
         } else {
             System.out.println("Resposta Válida.\nValor do resultado: " + "response.getValor()");

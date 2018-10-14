@@ -2,6 +2,7 @@ package Server;
 
 import Models.Request;
 import Models.Response;
+import Models.Type;
 
 import java.net.*;
 
@@ -27,7 +28,7 @@ public class Server {
 	            Request request = (Request) Connection.receive(client_socket);
 	            PeopleService peopleService = new PeopleService();
 	            
-	            Connection.send(client_socket, peopleService.get(/*request*/));
+	            Connection.send(client_socket, peopleService.get(/*request*/), Type.GET);
 	            
 	            try {
 	                client_socket.close();

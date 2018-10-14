@@ -1,16 +1,16 @@
 package Server;
 
-
 import java.net.*;
 import java.io.*;
 
 public class Connection {
 
-    public static void send(Socket socket, Object dados) {
+    public static void send(Socket socket, Object dados, Enum<?> type) {
         ObjectOutputStream out;
         try {
             out = new ObjectOutputStream(socket.getOutputStream());
             out.writeObject(dados);
+            out.writeObject(type);
         } catch (Exception e) {
             System.out.println("Excecao no OutputStream");
         }

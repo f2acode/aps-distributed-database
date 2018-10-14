@@ -5,17 +5,17 @@ import java.io.Serializable;
 public class Response implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-    private int status;
+    private Status status;
 
-    public Response(int status) {
+    public Response(Status status) {
         this.status = status;
     }
 
-    public int getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }
