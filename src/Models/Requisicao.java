@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class Requisicao implements Serializable {
 
-    private int operando1;
+	private static final long serialVersionUID = 1L;
+	private int operando1;
     private char operador;
     private int operando2;
 
