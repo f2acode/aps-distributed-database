@@ -1,9 +1,6 @@
 package Server;
 
-import Models.Request;
-import Models.Response;
-import Models.Status;
-import Models.Type;
+import Models.*;
 
 import java.net.*;
 
@@ -27,10 +24,14 @@ public class Server {
         while(true) {
 	        if (connect()) {
 	            Request request = (Request) Connection.receive(client_socket);
-	            
+                PeopleService peopleService = new PeopleService();
+                Person person = new Person();
+
 	            switch(request.getType()) {
 	            	case GET:
-	            	break;
+                        long id = request.getPerson().getId();
+                        person = peopleService.get(id);
+                        break;
 	            	case POST:
 		            	break;
 	            	case PUT:
@@ -38,10 +39,8 @@ public class Server {
 	            	case DELETE:
 		            	break;
 	            }
-	            
-	            PeopleService peopleService = new PeopleService();
-	            
-	            Connection.send(client_socket, peopleService.get(/*request*/));
+
+	            Connection.send(client_socket, person);
 	            
 	            try {
 	                client_socket.close();

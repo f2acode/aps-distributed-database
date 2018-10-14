@@ -2,6 +2,8 @@ package Models;
 
 public class Person {
 
+    private long id;
+
     private String name;
 
     private int age;
@@ -12,12 +14,23 @@ public class Person {
 
     private String phone;
 
-    public Person(String name, int age, Gender gender, String address, String phone) {
+    public Person(long id, String name, int age, Gender gender, String address, String phone) {
+        this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.address = address;
         this.phone = phone;
+    }
+
+    public Person() {}
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
