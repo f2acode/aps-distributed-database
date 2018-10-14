@@ -3,10 +3,14 @@ package Server;
 import Models.Person;
 
 public class PeopleService {
-	public void insert(Person person) {}
-	public void update(Person person) {}
+	public Person create(Person person) {
+		return new Person(0L, null, 0, null, null, null);
+	}
+	public Person update(Person person) {
+		return new Person(0L, null, 0, null, null, null);
+	}
 	public void delete(Person person) {}
-	public Person get(long id) {
+	public Person read(long id) {
 		return new Person(0L, null, 0, null, null, null);
 	}
 }
