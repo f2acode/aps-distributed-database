@@ -25,7 +25,7 @@ public class Server {
 	        if (connect()) {
 	            Request request = (Request) Connection.receive(client_socket);
                 PeopleService peopleService = new PeopleService();
-                Person person = new Person();
+                Person person = null;
 
 	            switch(request.getType()) {
 	            	case GET:
