@@ -9,7 +9,7 @@ public class PeopleService {
 	public Person update(Person person) {
 		return new Person(0L, null, 0, null, null, null);
 	}
-	public void delete(Person person) {}
+	public void delete(long id) {}
 	public Person read(long id) {
 		return new Person(0L, null, 0, null, null, null);
 	}

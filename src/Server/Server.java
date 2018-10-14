@@ -29,19 +29,22 @@ public class Server {
 
 	            switch(request.getType()) {
 	            	case GET:
-                        Connection.send(client_socket, peopleService.read(request.getPerson().getId()));
+                        person = peopleService.read(request.getPerson().getId());
                         break;
 	            	case POST:
-	            		Connection.send(client_socket, peopleService.create(request.getPerson()));
+                        person = peopleService.create(request.getPerson());
 		            	break;
 	            	case PUT:
-	            		Connection.send(client_socket, peopleService.update(request.getPerson()));
+                        person = peopleService.update(request.getPerson());
 		            	break;
 	            	case DELETE:
-		            	break;
+                        peopleService.delete(request.getPerson().getId());
+                        break;
 	            }
-	            
-	            try {
+
+                Connection.send(client_socket, person);
+
+                try {
 	                client_socket.close();
 	                server_socket.close();
 	            }
