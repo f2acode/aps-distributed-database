@@ -27,10 +27,21 @@ public class Server {
         while(true) {
 	        if (connect()) {
 	            Request request = (Request) Connection.receive(client_socket);
-                Type type = (Type) Connection.receive(client_socket);
+	            
+	            switch(request.getType()) {
+	            	case GET:
+	            	break;
+	            	case POST:
+		            	break;
+	            	case PUT:
+		            	break;
+	            	case DELETE:
+		            	break;
+	            }
+	            
 	            PeopleService peopleService = new PeopleService();
 	            
-	            Connection.send(client_socket, peopleService.get(/*request*/), Status.ACCEPTED);
+	            Connection.send(client_socket, peopleService.get(/*request*/));
 	            
 	            try {
 	                client_socket.close();

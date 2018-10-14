@@ -23,9 +23,9 @@ public class Client {
     }
 
     public static void main(String args[]){
-        Request requisicao = new Request();
+        Request request = new Request();
         new Client();
-        Connection.send(socket, requisicao, Type.GET);
+        Connection.send(socket, request);
         Response response = (Response) Connection.receive(socket);
         
         if (response.getStatus().equals(Status.INVALID)) {
