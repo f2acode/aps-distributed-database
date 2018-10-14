@@ -29,7 +29,7 @@ public class Server {
 
 	            switch(request.getType()) {
 	            	case GET:
-                        person = peopleService.read(request.getPerson().getId());
+                        Connection.send(client_socket, peopleService.read(request.getPerson().getId()));
                         break;
 	            	case POST:
 	            		Connection.send(client_socket, peopleService.create(request.getPerson()));
