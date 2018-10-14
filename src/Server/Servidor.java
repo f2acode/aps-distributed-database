@@ -1,3 +1,8 @@
+package Server;
+
+import Models.Requisicao;
+import Models.Resposta;
+
 import java.net.*;
 
 public class Servidor {

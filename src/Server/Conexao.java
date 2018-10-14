@@ -1,9 +1,11 @@
+package Server;
+
 import java.net.*;
 import java.io.*;
 
-class Conexao {
+public class Conexao {
 
-    static void send(Socket socket, Object dados) {
+    public static void send(Socket socket, Object dados) {
         ObjectOutputStream out;
         try {
             out = new ObjectOutputStream(socket.getOutputStream());
@@ -13,7 +15,7 @@ class Conexao {
         }
     }
 
-    static Object receive(Socket socket) {
+    public static Object receive(Socket socket) {
         ObjectInputStream in;
         Object obj=null;
         try {

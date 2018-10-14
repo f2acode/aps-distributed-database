@@ -1,3 +1,9 @@
+package Client;
+
+import Models.Requisicao;
+import Models.Resposta;
+import Server.Conexao;
+
 import java.io.*;
 import java.net.*;
 

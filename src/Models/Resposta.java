@@ -1,16 +1,18 @@
+package Models;
+
 import java.io.Serializable;
 
-class Resposta implements Serializable {
+public class Resposta implements Serializable {
 
     private int valor;
     private int validez;
 
-    Resposta(int valor, int validez) {
+    public Resposta(int valor, int validez) {
         this.valor = valor;
         this.validez = validez;
     }
 
-    int getValor() {
+    public int getValor() {
         return valor;
     }
 
@@ -18,7 +20,7 @@ class Resposta implements Serializable {
         this.valor = valor;
     }
 
-    int getValidez() {
+    public int getValidez() {
         return validez;
     }
 

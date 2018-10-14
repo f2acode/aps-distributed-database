@@ -1,18 +1,20 @@
+package Models;
+
 import java.io.Serializable;
 
-class Requisicao implements Serializable {
+public class Requisicao implements Serializable {
 
     private int operando1;
     private char operador;
     private int operando2;
 
-    Requisicao(int operando1, char operador, int operando2) {
+    public Requisicao(int operando1, char operador, int operando2) {
         this.operando1 = operando1;
         this.operador = operador;
         this.operando2 = operando2;
     }
 
-    int getOperando1() {
+    public int getOperando1() {
         return operando1;
     }
 
@@ -20,7 +22,7 @@ class Requisicao implements Serializable {
         this.operando1 = operando1;
     }
 
-    char getOperador() {
+    public char getOperador() {
         return operador;
     }
 
@@ -28,7 +30,7 @@ class Requisicao implements Serializable {
         this.operador = operador;
     }
 
-    int getOperando2() {
+    public int getOperando2() {
         return operando2;
     }
 
