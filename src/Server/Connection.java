@@ -2,6 +2,8 @@ package Server;
 
 import java.net.*;
 import java.io.*;
+import java.util.Arrays;
+import java.util.List;
 
 public class Connection {
 
@@ -16,15 +18,18 @@ public class Connection {
         }
     }
 
-    public static Object receive(Socket socket) {
+    public static List<Object> receive(Socket socket) {
         ObjectInputStream in;
         Object obj=null;
+        Object type=null;
         try {
             in = new ObjectInputStream(socket.getInputStream());
             obj = in.readObject();
+            type = in.readObject();
         } catch (Exception e) {
             System.out.println("Excecao no InputStream: " + e);
         }
-        return obj;
+
+        return Arrays.asList(obj, type);
     }
 }
