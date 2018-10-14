@@ -11,11 +11,11 @@ public class Response implements Serializable {
         this.status = status;
     }
 
-    public int getValidez() {
+    public int getStatus() {
         return status;
     }
 
-    public void setValidez(int status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }

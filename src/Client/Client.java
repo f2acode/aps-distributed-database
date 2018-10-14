@@ -26,7 +26,7 @@ public class Client {
         Connection.send(socket, requisicao);
         Response response = (Response) Connection.receive(socket);
         
-        if (response.getValidez() == 0) {
+        if (response.getStatus() == 0) {
             System.out.println("Resposta Inválida");
         } else {
             System.out.println("Resposta Válida.\nValor do resultado: " + "response.getValor()");

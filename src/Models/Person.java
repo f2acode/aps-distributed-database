@@ -6,16 +6,16 @@ public class Person {
 
     private int age;
 
-    private Sex sex;
+    private Gender gender;
 
     private String address;
 
     private String phone;
 
-    public Person(String name, int age, Sex sex, String address, String phone) {
+    public Person(String name, int age, Gender gender, String address, String phone) {
         this.name = name;
         this.age = age;
-        this.sex = sex;
+        this.gender = gender;
         this.address = address;
         this.phone = phone;
     }
@@ -36,12 +36,12 @@ public class Person {
         this.age = age;
     }
 
-    public Sex getSex() {
-        return sex;
+    public Gender getGender() {
+        return gender;
     }
 
-    public void setSex(Sex sex) {
-        this.sex = sex;
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public String getAddress() {
