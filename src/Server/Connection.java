@@ -4,7 +4,7 @@ package Server;
 import java.net.*;
 import java.io.*;
 
-public class Conexao {
+public class Connection {
 
     public static void send(Socket socket, Object dados) {
         ObjectOutputStream out;

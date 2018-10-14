@@ -1,17 +1,17 @@
 package Server;
 
-import Models.Requisicao;
-import Models.Resposta;
+import Models.Request;
+import Models.Response;
 import Services.PeopleService;
 
 import java.net.*;
 
-public class Servidor {
+public class Server {
 
     private static ServerSocket server_socket;
     private static Socket client_socket;
 
-    private Servidor() {
+    private Server() {
 
         try {
             server_socket = new ServerSocket(9600);
@@ -22,13 +22,14 @@ public class Servidor {
     }
 
     public static void main(String args[]) {
-        new Servidor();
+        new Server();
         while(true) {
 	        if (connect()) {
-	            Requisicao requisicao = (Requisicao) Conexao.receive(client_socket);
+	            Request request = (Request) Connection.receive(client_socket);
 	            PeopleService peopleService = new PeopleService();
 	            
-	            Conexao.send(client_socket, peopleService.calcular(requisicao));
+	            Connection.send(client_socket, peopleService.get(/*request*/));
+	            
 	            try {
 	                client_socket.close();
 	                server_socket.close();
