@@ -12,7 +12,7 @@ public class Person {
 
     private String phone;
 
-    private Person(String name, int age, Sex sex, String address, String phone) {
+    public Person(String name, int age, Sex sex, String address, String phone) {
         this.name = name;
         this.age = age;
         this.sex = sex;
