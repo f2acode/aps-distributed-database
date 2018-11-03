@@ -20,6 +20,8 @@ public class StorageServer {
     }
 
     public static void main(String args[]) {
+    	FileHelper fileHelper = new FileHelper();
+    	fileHelper.Write();
         /*new StorageServer();
         while(true) {
 	        if (connect()) {
