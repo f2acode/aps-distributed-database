@@ -7,7 +7,12 @@ public class Request implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Type type;
 	private Person person;
-	
+
+    public Request(Type type, Person person) {
+        this.type = type;
+        this.person = person;
+    }
+
     public Request() {}
     
     public Type getType() {

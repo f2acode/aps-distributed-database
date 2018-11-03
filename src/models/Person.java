@@ -16,7 +16,16 @@ public class Person {
         this.address = address;
     }
 
-    public Person() {}
+    public Person(String name, int age, Gender gender, String address) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.address = address;
+    }
+
+    public Person(long id) {
+        this.id = id;
+    }
 
     public long getId() {
         return id;
