@@ -1,15 +1,11 @@
-package Models;
+package models;
 
 public class Person {
 
     private long id;
-
     private String name;
-
     private int age;
-
     private Gender gender;
-
     private String address;
 
     public Person(long id, String name, int age, Gender gender, String address) {

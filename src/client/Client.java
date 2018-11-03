@@ -1,14 +1,15 @@
-package Client;
+package client;
 
-import Models.Request;
-import Models.Response;
-import Models.Status;
-import Models.Type;
-import Server.Connection;
+import models.Request;
+import models.Response;
+import models.Status;
+import models.Type;
 
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
+
+import helpers.Connection;
 
 public class Client {
 

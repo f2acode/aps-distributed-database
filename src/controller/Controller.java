@@ -1,16 +1,16 @@
-package Server;
-
-import Models.*;
+package controller;
 
 import java.net.*;
 
-public class Server {
+import helpers.Connection;
+import models.*;
+
+public class Controller {
 
     private static ServerSocket server_socket;
     private static Socket client_socket;
 
-    private Server() {
-
+    private Controller() {
         try {
             server_socket = new ServerSocket(9600);
             System.out.println("Criando o Server Socket");
@@ -20,29 +20,31 @@ public class Server {
     }
 
     public static void main(String args[]) {
-        new Server();
+        new Controller();
         while(true) {
 	        if (connect()) {
 	            Request request = (Request) Connection.receive(client_socket);
                 PeopleService peopleService = new PeopleService();
-                Person person = null;
+                Response response = null;
 
 	            switch(request.getType()) {
 	            	case GET:
-                        person = peopleService.read(request.getPerson().getId());
+	            		response = peopleService.read(request.getPerson().getId());
                         break;
 	            	case POST:
-                        person = peopleService.create(request.getPerson());
+	            		response = peopleService.create(request.getPerson());
 		            	break;
 	            	case PUT:
-                        person = peopleService.update(request.getPerson());
+	            		response = peopleService.update(request.getPerson());
 		            	break;
 	            	case DELETE:
-                        peopleService.delete(request.getPerson().getId());
+	            		response = peopleService.delete(request.getPerson().getId());
                         break;
+                    default:
+                    	response = new Response(null, Status.WRONG_TYPE);
 	            }
 
-                Connection.send(client_socket, person);
+                Connection.send(client_socket, response);
 
                 try {
 	                client_socket.close();

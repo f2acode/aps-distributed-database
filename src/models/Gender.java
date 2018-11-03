@@ -1,8 +1,6 @@
-package Models;
+package models;
 
 public enum Gender {
-
     MALE,
     FEMALE;
-
 }
