@@ -1,6 +1,7 @@
 package storage_servers;
 
 import java.net.*;
+
 import helpers.Connection;
 
 import models.*;
@@ -11,40 +12,49 @@ public class StorageServer {
     private static Socket client_socket;
 
     private StorageServer() {
-        /*try {
+        try {
             server_socket = new ServerSocket(9601);
             System.out.println("Criando o Server Socket");
         } catch (Exception e) {
             System.out.println("Nao criei o server socket...");
-        }*/
+        }
     }
 
     public static void main(String args[]) {
-    	FileHelper fileHelper = new FileHelper();
-    	fileHelper.Write();
+    	StorageService storageService = new StorageService();
+    	storageService.create(new Person(1L, "Felipe Augusto de Almeida", 23, Gender.MALE, "Av. Augusta"));
+    	
+    	Response response = storageService.read(2L);
+    	System.out.println(response.getPerson().getId() + "\n\n"
+    			+ response.getPerson().getName() + "\n\n"
+    			+ response.getPerson().getAge() + "\n\n"
+    			+ response.getPerson().getGender() + "\n\n"
+    			+ response.getPerson().getAddress() + "\n\n");
         /*new StorageServer();
         while(true) {
 	        if (connect()) {
 	            Request request = (Request) Connection.receive(client_socket);
-                
-	            PeopleService peopleService = new PeopleService();
-                Person person = null;
+	            StorageService storageService = new StorageService();
+                Response response = null;
 
 	            switch(request.getType()) {
 	            	case GET:
-                        person = peopleService.read(request.getPerson().getId());
+	            		response = storageService.read(request.getPerson().getId());
                         break;
 	            	case POST:
-                        person = peopleService.create(request.getPerson());
+	            		response = storageService.create(request.getPerson());
 		            	break;
 	            	case PUT:
-                        person = peopleService.update(request.getPerson());
+	            		response = storageService.update(request.getPerson());
 		            	break;
 	            	case DELETE:
-                        peopleService.delete(request.getPerson().getId());
+	            		response = storageService.delete(request.getPerson().getId());
                         break;
+                    default:
+                    	response = new Response(null, Status.WRONG_TYPE);
+	            }
 
-                Connection.send(client_socket, person);
+                Connection.send(client_socket, response);
 
                 try {
 	                client_socket.close();
