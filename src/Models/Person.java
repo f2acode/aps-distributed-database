@@ -12,15 +12,12 @@ public class Person {
 
     private String address;
 
-    private String phone;
-
-    public Person(long id, String name, int age, Gender gender, String address, String phone) {
+    public Person(long id, String name, int age, Gender gender, String address) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.address = address;
-        this.phone = phone;
     }
 
     public Person() {}
@@ -65,11 +62,4 @@ public class Person {
         this.address = address;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 }
