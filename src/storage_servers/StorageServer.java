@@ -21,13 +21,12 @@ public class StorageServer {
     }
 
     public static void main(String args[]) {
-        /*new StorageServer();
+        new StorageServer();
         while(true) {
 	        if (connect()) {
 	            Request request = (Request) Connection.receive(client_socket);
 	            StorageService storageService = new StorageService();
                 Response response = null;
-
 	            switch(request.getType()) {
 	            	case GET:
 	            		response = storageService.read(request.getPerson().getId());
@@ -55,7 +54,7 @@ public class StorageServer {
 	                System.out.println("Nao encerrou a conexao corretamente" + e.getMessage());
 	            }
 	        }
-        }*/
+        }
     }
 
     private static boolean connect() {
@@ -64,7 +63,7 @@ public class StorageServer {
             client_socket = server_socket.accept();
             ret = true;
         } catch (Exception e) {
-            System.out.println("Nao fez conexao" + e.getMessage());
+            System.out.println("Nao fez conexao " + e.getMessage());
             ret = false;
         }
         return ret;

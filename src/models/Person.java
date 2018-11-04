@@ -1,8 +1,14 @@
 package models;
 
-public class Person {
+import java.io.Serializable;
 
-    private long id;
+public class Person implements Serializable{
+
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private long id;
     private String name;
     private int age;
     private Gender gender;
