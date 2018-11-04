@@ -21,15 +21,6 @@ public class StorageServer {
     }
 
     public static void main(String args[]) {
-    	StorageService storageService = new StorageService();
-    	storageService.create(new Person(1L, "Felipe Augusto de Almeida", 23, Gender.MALE, "Av. Augusta"));
-    	
-    	Response response = storageService.read(2L);
-    	System.out.println(response.getPerson().getId() + "\n\n"
-    			+ response.getPerson().getName() + "\n\n"
-    			+ response.getPerson().getAge() + "\n\n"
-    			+ response.getPerson().getGender() + "\n\n"
-    			+ response.getPerson().getAddress() + "\n\n");
         /*new StorageServer();
         while(true) {
 	        if (connect()) {

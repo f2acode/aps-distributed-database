@@ -15,7 +15,7 @@ public class FileHelper {
 	
 	public FileHelper() {
 		fr = null;
-		localPath = System.getProperty("user.home") + "/DistributedDatabase/person/";
+		localPath = System.getProperty("user.home") + "/DistributedDatabase/persons/";
 	}
 	
 	public String personToTxtData(Person person) {
@@ -26,10 +26,21 @@ public class FileHelper {
 		return data;
 	}
 	
-	public boolean create(Person person) {
+	public long getNextId(String path) {
+		File folder = new File(path);
+		long nextId = 0L;
+	    for (final File fileEntry : folder.listFiles()) {
+            nextId = Integer.valueOf(fileEntry.getName().split("\\.")[0]) + 1;
+	    }
+	    return nextId;
+	}
+	
+	public Person create(Person person) {
 		String data = personToTxtData(person);
+		long id = getNextId(localPath);
+		person.setId(id);
 		
-		File file = new File(localPath + person.getId() + ".txt");
+		File file = new File(localPath + id + ".txt");
         file.getParentFile().getParentFile().mkdir();
         file.getParentFile().mkdir();
         
@@ -47,19 +58,21 @@ public class FileHelper {
             }
         }
         
-        return true;
+        return person;
 	}
 	
 	public Person read(long id) throws IOException {
 		String currentStrLine;
-		Person person = new Person(id);
+		Person person = new Person(-1);
 		int lineIndex = 0;
 		BufferedReader br = null;
 		
 		File file = new File(localPath + id + ".txt");
+		
 		if(file.exists()) {
 			try {
-				br = new BufferedReader(new FileReader(file)); 			
+				br = new BufferedReader(new FileReader(file));
+				person.setId(id);
 				while ((currentStrLine = br.readLine()) != null) {
 					switch(lineIndex) {
 						case 0: person.setName(currentStrLine); break;
@@ -73,12 +86,41 @@ public class FileHelper {
 				
 			}finally {
 				br.close();
-			}
+			}	
+		}else {
+			return null;
 		}
 		
 		return person;
 	}
 	
-	public void update() { }
-	public void delete() { }
+	public Person update(Person person) {
+		String data = personToTxtData(person);		
+		File file = new File(localPath + person.getId() + ".txt");
+        file.getParentFile().getParentFile().mkdir();
+        file.getParentFile().mkdir();
+		
+		if(file.exists()) {
+	        try {
+	            file.createNewFile();
+	        	fr = new FileWriter(file);
+	            fr.write(data);
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }finally{
+	            try {
+	                fr.close();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
+		}else {
+			return null;
+		}
+        return person;
+	}
+	public boolean delete(long id) {
+		File file = new File(localPath + id + ".txt");
+        return file.delete();
+	}
 }

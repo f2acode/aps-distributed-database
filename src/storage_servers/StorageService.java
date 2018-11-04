@@ -13,15 +13,20 @@ public class StorageService {
 	}
 	
 	public Response create(Person person) {
-		//TODO validations
-		fileHelper.create(person);
-		return new Response(new Person(0L, null, 0, null, null), Status.VALID);
+		return new Response(fileHelper.create(person), Status.VALID);
 	}
 
 	public Response read(long id) {
 		Response response = new Response(null, null);
 		try {
-			response.setPerson(fileHelper.read(id));
+			Person person = fileHelper.read(id);
+			if(person != null) {
+				response.setPerson(person);
+				response.setStatus(Status.VALID);
+			}else {
+				response.setPerson(new Person(id));
+				response.setStatus(Status.ID_NOT_FOUND);
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,10 +35,11 @@ public class StorageService {
 	}
 	
 	public Response update(Person person) {
-		return new Response(new Person(0L, null, 0, null, null), Status.VALID);
+		return new Response(fileHelper.update(person), Status.VALID);
 	}
 
 	public Response delete(long id) {
+		fileHelper.delete(id);
 		return new Response(null, Status.VALID);
 	}
 }
