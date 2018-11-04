@@ -7,7 +7,6 @@ import helpers.Connection;
 import models.Person;
 import models.Request;
 import models.Response;
-import models.Status;
 import models.Type;
 
 public class PeopleService {
@@ -29,14 +28,22 @@ public class PeopleService {
 	}
 	
 	public Response read(long id) {
-		return new Response(new Person(0L, null, 0, null, null), Status.VALID);
+		Person person = new Person(id);
+		Request request = new Request(Type.GET, person);
+		Connection.send(socket, request);
+		return (Response) Connection.receive(socket);
 	}
 
 	public Response update(Person person) {
-		return new Response(new Person(0L, null, 0, null, null), Status.VALID);
+		Request request = new Request(Type.PUT, person);
+		Connection.send(socket, request);
+		return (Response) Connection.receive(socket);
 	}
 
 	public Response delete(long id) {
-		return new Response(null, Status.VALID);
+		Person person = new Person(id);
+		Request request = new Request(Type.GET, person);
+		Connection.send(socket, request);
+		return (Response) Connection.receive(socket);
 	}
 }
