@@ -28,7 +28,6 @@ public class StorageService {
 				response.setStatus(Status.ID_NOT_FOUND);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return response;
@@ -39,7 +38,9 @@ public class StorageService {
 	}
 
 	public Response delete(long id) {
-		fileHelper.delete(id);
-		return new Response(null, Status.VALID);
+		if(fileHelper.delete(id)) {
+			return new Response(null, Status.VALID);	
+		}
+		return new Response(null, Status.ID_NOT_FOUND);
 	}
 }
