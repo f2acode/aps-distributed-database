@@ -12,8 +12,7 @@ import java.util.regex.Pattern;
 
 public class Client {
 
-    private static final Person mock = new Person(1L, "oi", 22, Gender.MALE, "alameda");
-    private static Socket socket;
+    private static Socket clientController_socket;
     private static final String escolhaOperacao =
             "\t1 - Consultar um registro existente;\n" +
             "\t2 - Inserir um novo registro;\n" +
@@ -24,7 +23,7 @@ public class Client {
 
     private Client() {
         try {
-            socket = new Socket("localhost", 9600);
+            clientController_socket = new Socket("localhost", 9600);
         }
         catch (Exception e) {
             System.out.println("Nao consegui resolver o host...");
@@ -38,7 +37,7 @@ public class Client {
 
         Scanner in = new Scanner(System.in);
 
-//        new Client();
+        new Client();
         Person person;
 
         long id;
@@ -65,11 +64,11 @@ public class Client {
 
                     person = new Person(id);
                     request = new Request(type, person);
-//                    Connection.send(socket, request);
-//                    response = (Response) Connection.receive(socket);
+                    Connection.send(clientController_socket, request);
+                    response = (Response) Connection.receive(clientController_socket);
 
-                    status = /*response.getStatus();*/Status.VALID;
-                    person = /*response.getPerson();*/mock;
+                    status = response.getStatus();
+                    person = response.getPerson();
                     if (status == Status.ID_NOT_FOUND) {
                         System.out.println("\nO ID informado não consta na base de dados, tente novamente mais tarde!");
                     } else {
@@ -89,11 +88,11 @@ public class Client {
                     address = getAddress(in);
 
                     request = new Request(type, new Person(name, age, gender, address));
-//                    Connection.send(socket, request);
-//                    response = (Response) Connection.receive(socket);
+                    Connection.send(clientController_socket, request);
+                    response = (Response) Connection.receive(clientController_socket);
 
-                    status = /*response.getStatus();*/Status.VALID;
-                    person = /*response.getPerson();*/mock;
+                    status = response.getStatus();
+                    person = response.getPerson();
                     System.out.println("\nRegistro cadastrado com sucesso com sucesso!" +
                             getPersonData(person));
                     break;
@@ -110,11 +109,11 @@ public class Client {
                     address = getAddress(in);
 
                     request = new Request(type, new Person(id ,name, age, gender, address));
-//                    Connection.send(socket, request);
-//                    response = (Response) Connection.receive(socket);
+                    Connection.send(clientController_socket, request);
+                    response = (Response) Connection.receive(clientController_socket);
 
-                    status = /*response.getStatus();*/Status.VALID;
-                    person = /*response.getPerson();*/mock;
+                    status = response.getStatus();
+                    person = response.getPerson();
                     if (status == Status.ID_NOT_FOUND) {
                         System.out.println("\nO ID informado não consta na base de dados, tente novamente mais tarde!");
                     } else {
@@ -130,10 +129,10 @@ public class Client {
                     id = getId(in, pattern, matcher, "Informe o ID do registro a ser deletado:");
 
                     request = new Request(type, new Person(id));
-//                    Connection.send(socket, request);
-//                    response = (Response) Connection.receive(socket);
+                    Connection.send(clientController_socket, request);
+                    response = (Response) Connection.receive(clientController_socket);
 
-                    status = /*response.getStatus();*/Status.VALID;
+                    status = response.getStatus();
                     if (status == Status.ID_NOT_FOUND) {
                         System.out.println("\nO ID informado não consta na base de dados, tente novamente mais tarde!");
                     } else {
@@ -156,7 +155,7 @@ public class Client {
         } while (status != Status.CLOSE);
 
         try {
-            socket.close();
+            clientController_socket.close();
         } catch (IOException e) {
             System.out.println("Nao encerrou a conexao corretamente" + e.getMessage());
         }

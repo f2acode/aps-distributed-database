@@ -8,12 +8,12 @@ import models.*;
 
 public class StorageServer {
 
-    private static ServerSocket server_socket;
-    private static Socket client_socket;
+    private static ServerSocket controllerStorageServer_connectionSocket;
+    private static Socket controllerStorageServer_socket;
 
     private StorageServer() {
         try {
-            server_socket = new ServerSocket(9601);
+            controllerStorageServer_connectionSocket = new ServerSocket(9601);
             System.out.println("Criando o Server Socket");
         } catch (Exception e) {
             System.out.println("Nao criei o server socket...");
@@ -24,9 +24,9 @@ public class StorageServer {
         new StorageServer();
         while(true) {
 	        if (connect()) {
-	            Request request = (Request) Connection.receive(client_socket);
+	            Request request = (Request) Connection.receive(controllerStorageServer_socket);
 	            StorageService storageService = new StorageService();
-                Response response = null;
+                Response response;
 	            switch(request.getType()) {
 	            	case GET:
 	            		response = storageService.read(request.getPerson().getId());
@@ -44,11 +44,11 @@ public class StorageServer {
                     	response = new Response(null, Status.WRONG_TYPE);
 	            }
 
-                Connection.send(client_socket, response);
+                Connection.send(controllerStorageServer_socket, response);
 
                 try {
-	                client_socket.close();
-	                server_socket.close();
+	                controllerStorageServer_socket.close();
+	                controllerStorageServer_connectionSocket.close();
 	            }
 	            catch (Exception e) {
 	                System.out.println("Nao encerrou a conexao corretamente" + e.getMessage());
@@ -60,7 +60,7 @@ public class StorageServer {
     private static boolean connect() {
         boolean ret;
         try {
-            client_socket = server_socket.accept();
+            controllerStorageServer_socket = controllerStorageServer_connectionSocket.accept();
             ret = true;
         } catch (Exception e) {
             System.out.println("Nao fez conexao " + e.getMessage());
