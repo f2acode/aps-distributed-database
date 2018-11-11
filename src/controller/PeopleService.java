@@ -15,7 +15,7 @@ public class PeopleService {
 	
 	public PeopleService(long personId) {
 		try {
-			controllerStorageServer_socket = new Socket("localhost", serverPortResolver(personId));
+			controllerStorageServer_socket = new Socket("localhost", 9601/*serverPortResolver(personId)*/);
 		} catch (IOException e) {
 			System.out.println("PeopleService nao consegui resolver o host...");
 		}

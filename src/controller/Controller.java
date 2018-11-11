@@ -47,8 +47,8 @@ public class Controller {
                 Connection.send(clientController_socket, response);
 
                 try {
-	                clientController_socket.close();
-	                clientController_connectionSocket.close();
+	                //clientController_socket.close();
+	                //clientController_connectionSocket.close();
 	            }
 	            catch (Exception e) {
 	                System.out.println("Nao encerrou a conexao corretamente" + e.getMessage());

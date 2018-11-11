@@ -27,7 +27,7 @@ public class StorageServer {
     public static void main(String args[]) {
         new StorageServer();
         while(true) {
-	        if (connect1() && connect2() && connect3()) {
+	        if (connect1() /*|| connect2() || connect3()*/) {
 	            Request request = (Request) Connection.receive(controllerStorageServer_socket);
 	            StorageService storageService = new StorageService();
                 Response response;
@@ -52,9 +52,9 @@ public class StorageServer {
 
                 try {
 	                controllerStorageServer_socket.close();
-	                controllerStorageServer1_connectionSocket.close();
-	                controllerStorageServer2_connectionSocket.close();
-	                controllerStorageServer3_connectionSocket.close();
+	                //controllerStorageServer1_connectionSocket.close();
+	                //controllerStorageServer2_connectionSocket.close();
+	                //controllerStorageServer3_connectionSocket.close();
 	            }
 	            catch (Exception e) {
 	                System.out.println("Nao encerrou a conexao corretamente" + e.getMessage());

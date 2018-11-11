@@ -35,7 +35,6 @@ public class Client {
 
         Scanner in = new Scanner(System.in);
 
-        new Client();
         Person person;
 
         long id;
@@ -50,6 +49,7 @@ public class Client {
         Status status;
         do {
             String operacao = in.next();
+            new Client();
             Pattern pattern = null;
             Matcher matcher = null;
             switch (operacao) {
