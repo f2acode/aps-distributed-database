@@ -46,7 +46,7 @@ public class PeopleService {
 
 	public Response delete(long id) {
 		Person person = new Person(id);
-		Request request = new Request(Type.GET, person);
+		Request request = new Request(Type.DELETE, person);
 		Connection.send(controllerStorageServer_socket, request);
 		return (Response) Connection.receive(controllerStorageServer_socket);
 	}

@@ -1,4 +1,4 @@
-package storage_servers;
+package storage_server1;
 
 import models.Gender;
 import models.Person;
@@ -9,11 +9,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileHelper {
+public class FileHelper1 {
 	private FileWriter fr;
 	private String localPath;
 	
-	public FileHelper() {
+	public FileHelper1() {
 		fr = null;
 		localPath = System.getProperty("user.home") + "/DistributedDatabase1/persons/";
 	}

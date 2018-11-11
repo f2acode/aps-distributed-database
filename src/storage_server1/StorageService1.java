@@ -1,4 +1,4 @@
-package storage_servers;
+package storage_server1;
 
 import java.io.IOException;
 
@@ -6,10 +6,10 @@ import models.Person;
 import models.Response;
 import models.Status;
 
-public class StorageService {
-	private FileHelper fileHelper;
-	public StorageService() {
-		fileHelper = new FileHelper();
+public class StorageService1 {
+	private FileHelper1 fileHelper;
+	public StorageService1() {
+		fileHelper = new FileHelper1();
 	}
 	
 	public Response create(Person person) {
