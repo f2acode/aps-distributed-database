@@ -1,4 +1,4 @@
-package storage_servers;
+package storage_server3;
 
 import java.net.*;
 
@@ -6,14 +6,14 @@ import helpers.Connection;
 
 import models.*;
 
-public class StorageServer {
+public class StorageServer3 {
 
     private static ServerSocket controllerStorageServer_connectionSocket;
     private static Socket controllerStorageServer_socket;
 
-    private StorageServer() {
+    private StorageServer3() {
         try {
-            controllerStorageServer_connectionSocket = new ServerSocket(9601);
+            controllerStorageServer_connectionSocket = new ServerSocket(9603);
             System.out.println("Criando o Server Socket");
         } catch (Exception e) {
             System.out.println("Nao criei o server socket...");
@@ -21,11 +21,11 @@ public class StorageServer {
     }
 
     public static void main(String args[]) {
-        new StorageServer();
+        new StorageServer3();
         while(true) {
 	        if (connect()) {
 	            Request request = (Request) Connection.receive(controllerStorageServer_socket);
-	            StorageService storageService = new StorageService();
+	            StorageService3 storageService = new StorageService3();
                 Response response;
 	            switch(request.getType()) {
 	            	case GET:

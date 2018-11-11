@@ -1,4 +1,4 @@
-package storage_servers;
+package storage_server2;
 
 import models.Gender;
 import models.Person;
@@ -9,13 +9,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileHelper {
+public class FileHelper2 {
 	private FileWriter fr;
 	private String localPath;
 	
-	public FileHelper() {
+	public FileHelper2() {
 		fr = null;
-		localPath = System.getProperty("user.home") + "/DistributedDatabase1/persons/";
+		localPath = System.getProperty("user.home") + "/DistributedDatabase2/persons/";
 	}
 	
 	public String personToTxtData(Person person) {
