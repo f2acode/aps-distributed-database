@@ -24,7 +24,7 @@ public class Controller {
         while(true) {
 	        if (connect()) {
 	            Request request = (Request) Connection.receive(clientController_socket);
-                PeopleService peopleService = new PeopleService();
+                PeopleService peopleService = new PeopleService(request.getPerson().getId());
                 Response response;
 
 	            switch(request.getType()) {

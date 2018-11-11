@@ -13,12 +13,16 @@ public class PeopleService {
 	
 	private static Socket controllerStorageServer_socket;
 	
-	public PeopleService() {
+	public PeopleService(long personId) {
 		try {
-			controllerStorageServer_socket = new Socket("localhost", 9601);
+			controllerStorageServer_socket = new Socket("localhost", serverPortResolver(personId));
 		} catch (IOException e) {
 			System.out.println("PeopleService nao consegui resolver o host...");
 		}
+	}
+	
+	public int serverPortResolver(long personId) {
+		return (int) (9601 + (personId % 3));
 	}
 
 	public Response create(Person person) {

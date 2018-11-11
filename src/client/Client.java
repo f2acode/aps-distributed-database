@@ -11,7 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Client {
-
     private static Socket clientController_socket;
     private static final String escolhaOperacao =
             "\t1 - Consultar um registro existente;\n" +
@@ -19,7 +18,6 @@ public class Client {
             "\t3 - Alterar um registro existente;\n" +
             "\t4 - Deletar um registro existente;\n" +
             "\t5 - Sair\n";
-
 
     private Client() {
         try {
