@@ -12,10 +12,10 @@ import java.io.IOException;
 public class FileHelper3 {
 	private FileWriter fr;
 	private String localPath;
-	
+
 	public FileHelper3() {
 		fr = null;
-		localPath = System.getProperty("user.home") + "/DistributedDatabase3/persons/";
+		localPath = System.getProperty("user.home") + "/DistributedDatabases/DistributedDatabase3/persons/";
 	}
 	
 	public String personToTxtData(Person person) {
@@ -26,22 +26,12 @@ public class FileHelper3 {
 		return data;
 	}
 	
-	public long getNextId(String path) {
-		File folder = new File(path);
-		long nextId = 0L;
-	    for (final File fileEntry : folder.listFiles()) {
-            nextId = Integer.valueOf(fileEntry.getName().split("\\.")[0]) + 1;
-	    }
-	    return nextId;
-	}
-	
 	public Person create(Person person) {
 		String data = personToTxtData(person);
-		long id = getNextId(localPath);
-		person.setId(id);
-		
-		File file = new File(localPath + id + ".txt");
-        file.getParentFile().getParentFile().mkdir();
+
+		File file = new File(localPath + person.getId() + ".txt");
+		file.getParentFile().getParentFile().getParentFile().mkdir();
+		file.getParentFile().getParentFile().mkdir();
         file.getParentFile().mkdir();
         
         try {
@@ -97,7 +87,8 @@ public class FileHelper3 {
 	public Person update(Person person) {
 		String data = personToTxtData(person);		
 		File file = new File(localPath + person.getId() + ".txt");
-        file.getParentFile().getParentFile().mkdir();
+		file.getParentFile().getParentFile().getParentFile().mkdir();
+		file.getParentFile().getParentFile().mkdir();
         file.getParentFile().mkdir();
 		
 		if(file.exists()) {
@@ -119,6 +110,7 @@ public class FileHelper3 {
 		}
         return person;
 	}
+
 	public boolean delete(long id) {
 		File file = new File(localPath + id + ".txt");
         return file.delete();

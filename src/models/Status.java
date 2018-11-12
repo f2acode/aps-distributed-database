@@ -9,7 +9,8 @@ public enum Status implements Serializable {
     ID_NOT_FOUND,
     ID_WRONG_FORMAT,
     NOT_A_PERSON,
-    CLOSE;
+    CLOSE,
+    INTERNAL_SERVER_ERROR;
 
     private static final long serialVersionUID = 1L;
 

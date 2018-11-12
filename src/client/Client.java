@@ -67,7 +67,7 @@ public class Client {
 
                     status = response.getStatus();
                     person = response.getPerson();
-                    if (status == Status.ID_NOT_FOUND) {
+                    if (status.equals(Status.ID_NOT_FOUND)) {
                         System.out.println("\nO ID informado não consta na base de dados, tente novamente mais tarde!");
                     } else {
                         System.out.println("\nRegistro consultado com sucesso!" +
@@ -91,8 +91,12 @@ public class Client {
 
                     status = response.getStatus();
                     person = response.getPerson();
-                    System.out.println("\nRegistro cadastrado com sucesso com sucesso!" +
-                            getPersonData(person));
+                    if (status.equals(Status.INTERNAL_SERVER_ERROR)) {
+                        System.out.println("\nOcorreu um erro nos servidores, tente novamente mais tarde!");
+                    } else {
+                        System.out.println("\nRegistro cadastrado com sucesso com sucesso!" +
+                                getPersonData(person));
+                    }
                     break;
                 case "3":
                     System.out.println("\n------ Você escolheu alterar registro! ------\n");
@@ -112,7 +116,9 @@ public class Client {
 
                     status = response.getStatus();
                     person = response.getPerson();
-                    if (status == Status.ID_NOT_FOUND) {
+                    if (status.equals(Status.INTERNAL_SERVER_ERROR)) {
+                        System.out.println("\nOcorreu um erro nos servidores, tente novamente mais tarde!");
+                    } else if (status.equals(Status.ID_NOT_FOUND)) {
                         System.out.println("\nO ID informado não consta na base de dados, tente novamente mais tarde!");
                     } else {
                         System.out.println("\nRegistro alterado com sucesso!" +
@@ -131,7 +137,9 @@ public class Client {
                     response = (Response) Connection.receive(clientController_socket);
 
                     status = response.getStatus();
-                    if (status == Status.ID_NOT_FOUND) {
+                    if (status.equals(Status.INTERNAL_SERVER_ERROR)) {
+                        System.out.println("\nOcorreu um erro nos servidores, tente novamente mais tarde!");
+                    } else if (status.equals(Status.ID_NOT_FOUND)) {
                         System.out.println("\nO ID informado não consta na base de dados, tente novamente mais tarde!");
                     } else {
                         System.out.println("\nRegistro deletado com sucesso!");

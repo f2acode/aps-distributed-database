@@ -7,7 +7,9 @@ import models.Response;
 import models.Status;
 
 public class StorageService2 {
+
 	private FileHelper2 fileHelper;
+
 	public StorageService2() {
 		fileHelper = new FileHelper2();
 	}

@@ -15,33 +15,23 @@ public class FileHelper1 {
 	
 	public FileHelper1() {
 		fr = null;
-		localPath = System.getProperty("user.home") + "/DistributedDatabase1/persons/";
+		localPath = System.getProperty("user.home") + "/DistributedDatabases/DistributedDatabase1/persons/";
 	}
 	
 	public String personToTxtData(Person person) {
-		String data = person.getName() + "\r\n" + 
+		String data = person.getName() + "\r\n" +
 				person.getAge() + "\r\n" +
 				person.getGender() + "\r\n" +
 				person.getAddress();
 		return data;
 	}
 	
-	public long getNextId(String path) {
-		File folder = new File(path);
-		long nextId = 0L;
-	    for (final File fileEntry : folder.listFiles()) {
-            nextId = Integer.valueOf(fileEntry.getName().split("\\.")[0]) + 1;
-	    }
-	    return nextId;
-	}
-	
 	public Person create(Person person) {
 		String data = personToTxtData(person);
-		long id = getNextId(localPath);
-		person.setId(id);
 		
-		File file = new File(localPath + id + ".txt");
-        file.getParentFile().getParentFile().mkdir();
+		File file = new File(localPath + person.getId() + ".txt");
+		file.getParentFile().getParentFile().getParentFile().mkdir();
+		file.getParentFile().getParentFile().mkdir();
         file.getParentFile().mkdir();
         
         try {
@@ -119,6 +109,7 @@ public class FileHelper1 {
 		}
         return person;
 	}
+
 	public boolean delete(long id) {
 		File file = new File(localPath + id + ".txt");
         return file.delete();

@@ -48,7 +48,6 @@ public class StorageServer2 {
 
                 try {
 	                controllerStorageServer_socket.close();
-	                //controllerStorageServer_connectionSocket.close();
 	            }
 	            catch (Exception e) {
 	                System.out.println("Nao encerrou a conexao corretamente" + e.getMessage());
